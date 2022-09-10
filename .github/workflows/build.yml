@@ -1,0 +1,19 @@
+name: Builder
+
+on: push
+
+env:
+  MVN_PUBLISH_SASCHA_USER: ${{secrets.MavenUser}}
+  MVN_PUBLISH_SASCHA_TOKEN: ${{secrets.MavenToken}}
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+      - uses: GuillaumeFalourd/setup-windows10-sdk-action@v1.7
+        with:
+          sdk-version: 22000
+      - name: Execute Gradle build
+        run: ./gradlew build
