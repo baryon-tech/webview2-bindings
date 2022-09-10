@@ -9,8 +9,8 @@ plugins {
 val webview2_version: String by project
 val windows_version: String by project
 
-group = "de.saschat.natives"
-version = "1.0-SNAPSHOT"
+group = "io.github.baryontech.natives"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -71,7 +71,7 @@ linkerOpts = -v -L""" + File(projectDir, "/src/nativeinterop/cinterop/data/build
 publishing {
     repositories {
         maven {
-            url = uri("https://maven.sascha-t.de")
+            url = uri("https://maven.sascha-t.de/public")
             isAllowInsecureProtocol = true
             credentials {
                 username = System.getenv("MVN_PUBLISH_SASCHA_USER")

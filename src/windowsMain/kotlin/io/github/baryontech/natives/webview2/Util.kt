@@ -1,10 +1,7 @@
-import de.saschat.cinterop.webview2.CreateCoreWebView2Environment
-import de.saschat.cinterop.webview2.ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler
-import de.saschat.cinterop.webview2.ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandlerVtbl
-import de.saschat.cinterop.webview2.ICoreWebView2Environment
+package io.github.baryontech.natives.webview2
+
 import kotlinx.cinterop.*
 import platform.posix.IID
-import platform.windows.CoInitializeEx
 import platform.windows.HRESULT
 import platform.windows.ULONG
 
