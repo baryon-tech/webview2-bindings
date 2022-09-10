@@ -26,13 +26,15 @@ kotlin {
                         project.file("src/nativeInterop/cinterop/data/build/native/include"),
                         "C:\\Program Files (x86)\\Windows Kits\\10\\Include\\" + windows_version + "\\winrt"
                     )
-                    packageName("de.saschat.cinterop.webview2")
+                    packageName("io.github.baryontech.cinterop.webview2")
                     /*extraOpts(
                         "-libraryPath", "$projectDir/src/nativeInterop/cinterop/webview2/data/build/native/x64",
                         "-libraryPath", "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\" + System.getenv("WINDOWS_SDK_VERSION") + "\\um\\x64")
                     compilerOpts("-L", "$projectDir/src/nativeInterop/cinterop/webview2/data/build/native/x64")*/
-
                 }
+            }
+            kotlinOptions {
+                freeCompilerArgs = mutableListOf("-include-binary", File(projectDir, "/src/nativeinterop/cinterop/data/build/native/x64/WebView2Loader.dll").absolutePath)
             }
         }
     }
@@ -59,8 +61,7 @@ task("headers") {
             File(projectDir, "src/nativeInterop/cinterop/webview2.def").writeText("""
 headers = WebView2.h
 headerFilter = WebView2.h
-compilerOpts = -v
-linkerOpts = -v -L""" + File(projectDir, "/src/nativeinterop/cinterop/data/build/native/x64").absolutePath.replace("\\", "\\\\") + """ -lWebView2Loader.dll -lole32
+linkerOpts = -L""" + File(projectDir, "/src/nativeinterop/cinterop/data/build/native/x64").absolutePath.replace("\\", "\\\\") + """ -lole32
    """)
         }
         dependsOn(":unzip")
