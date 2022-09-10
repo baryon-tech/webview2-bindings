@@ -15,5 +15,5 @@ jobs:
       - uses: GuillaumeFalourd/setup-windows10-sdk-action@v1.7
         with:
           sdk-version: 22000
-      - name: Execute Gradle build
-        run: ./gradlew build
+      - name: Execute Gradle build and publish natives
+        run: ./gradlew build publish
