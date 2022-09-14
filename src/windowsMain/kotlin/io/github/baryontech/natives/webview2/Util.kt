@@ -5,11 +5,12 @@ import platform.posix.IID
 import platform.windows.HRESULT
 import platform.windows.ULONG
 
-fun <TDelegate : CStructVar, TDelegateV : CStructVar, TReturn : CPointed> createHandler(
-    callback: CPointer<CFunction<(CPointer<TDelegate>?, HRESULT, CPointer<TReturn>?) -> ULONG>>
+// CFunction<(CPointer<TDelegate>?, HRESULT, CPointer<TReturn>?) -> ULONG>
+
+fun <TDelegate : CStructVar, TDelegateV : CStructVar, TReturn : CPointed> delegate(
+    callback: CPointer<CFunction<*>>
 ): CPointer<TDelegate> {
-    val scope = MemScope();
-    val tDelVtblRep = scope.allocArray<ULongVarOf<ULong>>(4)
+    val tDelVtblRep = nativeHeap.allocArray<ULongVarOf<ULong>>(4)
 
     val QueryInterface = staticCFunction { a: CPointer<TDelegate>?,
                                            b: CPointer<IID>?,
@@ -30,7 +31,8 @@ fun <TDelegate : CStructVar, TDelegateV : CStructVar, TReturn : CPointed> create
     tDelVtblRep[2] = Release.rawValue.toLong().toULong();
     tDelVtblRep[3] = callback.rawValue.toLong().toULong();
 
-    val tDelRep = scope.alloc(tDelVtblRep.rawValue.toLong().toULong());
+    val tDelRep = nativeHeap.alloc(tDelVtblRep.rawValue.toLong().toULong());
 
     return tDelRep.ptr.reinterpret();
 }
+

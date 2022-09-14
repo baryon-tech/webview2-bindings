@@ -10,7 +10,7 @@ val webview2_version: String by project
 val windows_version: String by project
 
 group = "io.github.baryontech.natives"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -61,7 +61,7 @@ task("headers") {
             File(projectDir, "src/nativeInterop/cinterop/webview2.def").writeText("""
 headers = WebView2.h
 headerFilter = WebView2.h
-linkerOpts = -L""" + File(projectDir, "/src/nativeinterop/cinterop/data/build/native/x64").absolutePath.replace("\\", "\\\\") + """ -lole32
+linkerOpts = -L""" + File(projectDir, "/src/nativeinterop/cinterop/data/build/native/x64").absolutePath.replace("\\", "\\\\") + """ -lole32 -lWebView2Loader.dll
    """)
         }
         dependsOn(":unzip")
