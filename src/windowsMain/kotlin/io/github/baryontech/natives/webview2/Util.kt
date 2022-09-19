@@ -8,7 +8,7 @@ import platform.windows.ULONG
 // CFunction<(CPointer<TDelegate>?, HRESULT, CPointer<TReturn>?) -> ULONG>
 
 fun <TDelegate : CStructVar, TDelegateV : CStructVar, TReturn : CPointed> delegate(
-    callback: CPointer<CFunction<*>>
+    callback: CPointer<*>
 ): CPointer<TDelegate> {
     val tDelVtblRep = nativeHeap.allocArray<ULongVarOf<ULong>>(4)
 
