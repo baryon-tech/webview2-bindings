@@ -10,7 +10,7 @@ val webview2_version: String by project
 val windows_version: String by project
 
 group = "io.github.baryontech.natives"
-version = "1.0.1"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
